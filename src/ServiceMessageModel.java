@@ -6,7 +6,7 @@ public class ServiceMessageModel {
     public static int SERVICE_DISCOVER_NOT_FOUND = 202;
     public static int SERVICE_DISCOVER_OK = 203;
 
-    int code;
-    String data;
+    public int code;
+    public String data;
 
 }

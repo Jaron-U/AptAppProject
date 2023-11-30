@@ -13,8 +13,8 @@ public class ServiceInfoModel {
     public static int SERVICE_APT_SEARCH_PRICE = 311;
     public static int SERVICE_APT_SEARCH_TYPE = 312;
 
-    int serviceCode;
-    String serviceHostAddress;
-    int serviceHostPort; // May not be needed, as it's better to include port within the address
+    public int serviceCode;
+    public String serviceHostAddress;
+    public int serviceHostPort; // May not be needed, as it's better to include port within the address
 
 }
