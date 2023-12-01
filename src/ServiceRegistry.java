@@ -16,16 +16,10 @@ public class ServiceRegistry {
 
         System.out.println("Hello world!");
 
-        // server is listening on port 5000
-
-        // running infinite loop for getting
-        // client request
+        // Create server at port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         HttpContext root = server.createContext("/pub");
         root.setHandler(ServiceRegistry::handlePublish);
-
-        // HttpContext context = server.createContext("/users");
-        // context.setHandler(WebServer::handleRequestUser);
 
         HttpContext product = server.createContext("/disc");
         product.setHandler(ServiceRegistry::handleDisc);
