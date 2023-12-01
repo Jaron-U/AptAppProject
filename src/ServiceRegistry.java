@@ -113,11 +113,11 @@ public class ServiceRegistry {
                     System.out.println("service found");
                     list = registry.get(info.serviceCode);
                     res.code = ServiceMessageModel.SERVICE_DISCOVER_OK;
+                    // Get a random service info
                     Random rand = new Random();
                     int id = rand.nextInt() % list.size();
                     System.out.println(id);
                     String jsonINFO = gson.toJson(list.get(id));
-                    System.out.println(jsonINFO);
                     res.data = gson.toJson(jsonINFO);
                 }
 
