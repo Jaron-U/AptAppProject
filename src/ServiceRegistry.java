@@ -14,7 +14,7 @@ public class ServiceRegistry {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Hello world!");
+        System.out.println("Service Registry Started");
 
         // Create server at port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
@@ -100,10 +100,11 @@ public class ServiceRegistry {
                 return;
             } else {
                 // Get the request info
-                ServiceInfoModel info = gson.fromJson(msg.data, ServiceInfoModel.class);
-                System.out.println("seeking service " + info.serviceCode);
+                String info = gson.fromJson(msg.data, String.class);
+                int serviceCode = Integer.parseInt(info);
+                System.out.println("seeking service " + serviceCode);
                 List<ServiceInfoModel> list;
-                if (!registry.containsKey(info.serviceCode)) {
+                if (!registry.containsKey(serviceCode)) {
                     // return nothing if server unregistered
                     System.out.println("service not found");
                     res.code = ServiceMessageModel.SERVICE_DISCOVER_NOT_FOUND;
@@ -111,7 +112,7 @@ public class ServiceRegistry {
                 } else {
                     // return service if registered
                     System.out.println("service found");
-                    list = registry.get(info.serviceCode);
+                    list = registry.get(serviceCode);
                     res.code = ServiceMessageModel.SERVICE_DISCOVER_OK;
                     // Get a random service info
                     Random rand = new Random();
