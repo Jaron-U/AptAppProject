@@ -1,5 +1,8 @@
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
@@ -101,6 +104,7 @@ public class UserService extends MicroService {
                     userObj.userID = id;
                     userObj.fullName = jedis.hget("user:" + idString, "displayName");
                     userObj.password = passwrd;
+                    userObj.email = jedis.hget("user:" + idString, "email");
                     userObj.wishListID = Integer.parseInt(jedis.hget("user:" + idString, "wishListID"));
                     System.out.println("logged in with userID " + userObj.userID);
                 }
@@ -123,22 +127,22 @@ public class UserService extends MicroService {
         String content = extractMessage(exchange);
         content = gson.fromJson(content, String.class);
         System.out.println("Requested load user by ID" + content);
-        String idString;
+        String idKey;
         User userObj = new User();
         userObj.userID = -1;
         int id;
         try {
             // User data = gson.fromJson(content, User.class);
             id = Integer.parseInt(content);
-            idString = "user:" + id;
-            System.out.println(idString);
-            if (jedis.exists(idString)) {
+            idKey = "user:" + id;
+            System.out.println(idKey);
+            if (jedis.exists(idKey)) {
                 System.out.println("user found");
-                userObj.username = jedis.hget(idString, "userName");
+                userObj.username = jedis.hget(idKey, "userName");
                 userObj.userID = id;
-                userObj.fullName = jedis.hget(idString, "displayName");
-                userObj.password = jedis.hget(idString, "password");
-                userObj.wishListID = Integer.parseInt(jedis.hget(idString, "wishListID"));
+                userObj.fullName = jedis.hget(idKey, "displayName");
+                userObj.password = jedis.hget(idKey, "password");
+                userObj.wishListID = Integer.parseInt(jedis.hget(idKey, "wishListID"));
             } else {
                 System.out.println("user of id does not exist");
                 userObj.userID = -1;
@@ -155,7 +159,53 @@ public class UserService extends MicroService {
     }
 
     private static void handleSave(HttpExchange exchange) throws IOException {
+
         String content = extractMessage(exchange);
+        System.out.println("Requested register");
+        try {
+            User temp = gson.fromJson(content, User.class);
+            System.out.println("Username: " + temp.username);
+            System.out.println("password: " + temp.password);
+            // Get the incrementing userid
+            int newID = Integer.parseInt(jedis.get("userIDmax"));
+
+            if (!jedis.exists("user2id:" + temp.username)) {
+                // Increment incrementing userID
+                jedis.set("userIDmax", Integer.toString(newID + 1));
+                // Create new userdata hash
+                Map<String, String> userData = new HashMap<String, String>();
+                userData.put("userName", temp.username);
+                userData.put("passWord", temp.password);
+                userData.put("displayName", temp.fullName);
+                userData.put("email", temp.email);
+                userData.put("wishListID", Integer.toString(newID));
+                // Create new user to id map
+                jedis.set("user2id:" + temp.username, Integer.toString((newID)));
+                // Insert new user
+                jedis.hset("user:" + newID, userData);
+                // Set the return object's user and wishlistID, 
+                temp.userID = newID;
+                temp.wishListID = newID;
+                // Send
+                SendJSONResponse(exchange, gson.toJson(temp));
+                return;
+            } else {
+                System.out.println("Username: " + temp.username + " already exist");
+            }
+
+        } catch (Exception e) {
+            User empty = new User();
+            empty.userID = -1;
+            SendJSONResponse(exchange, gson.toJson(empty));
+            e.printStackTrace();
+            return;
+        }
+        // This will be reached if the username already exist
+        User empty = new User();
+        empty.userID = -1;
+        SendJSONResponse(exchange, gson.toJson(empty));
+        return;
+
     }
 
     /**
