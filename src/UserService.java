@@ -115,13 +115,52 @@ public class UserService extends MicroService {
         SendJSONResponse(exchange, jsonRes);
     }
 
+    /**
+     * Get user info according to given userID
+     */
     private static void handleLoad(HttpExchange exchange) throws IOException {
+
+        String content = extractMessage(exchange);
+        content = gson.fromJson(content, String.class);
+        System.out.println("Requested load user by ID" + content);
+        String idString;
+        User userObj = new User();
+        userObj.userID = -1;
+        int id;
+        try {
+            // User data = gson.fromJson(content, User.class);
+            id = Integer.parseInt(content);
+            idString = "user:" + id;
+            System.out.println(idString);
+            if (jedis.exists(idString)) {
+                System.out.println("user found");
+                userObj.username = jedis.hget(idString, "userName");
+                userObj.userID = id;
+                userObj.fullName = jedis.hget(idString, "displayName");
+                userObj.password = jedis.hget(idString, "password");
+                userObj.wishListID = Integer.parseInt(jedis.hget(idString, "wishListID"));
+            } else {
+                System.out.println("user of id does not exist");
+                userObj.userID = -1;
+            }
+            // return userObj;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            userObj.userID = -1;
+        }
+        String jsonRes = gson.toJson(userObj);
+        SendJSONResponse(exchange, jsonRes);
 
     }
 
     private static void handleSave(HttpExchange exchange) throws IOException {
+        String content = extractMessage(exchange);
     }
 
+    /**
+     * Get the request body of http request
+     */
     private static String extractMessage(HttpExchange exchange) throws IOException {
         InputStream is = exchange.getRequestBody();
         // Read the JSON data from the input stream
