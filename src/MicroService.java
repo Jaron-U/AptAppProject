@@ -11,10 +11,10 @@ import com.google.gson.Gson;
  */
 public class MicroService {
     // These value all needs to be set for service to work
-    public static String registryAddr = null;
-    public static String serviceAddr = null;
-    public static int servicePort = 0;
-    public static int serviceCode = 0;
+    // public static String registryAddr = null;
+    // public static String serviceAddr = null;
+    // public static int servicePort = 0;
+    // public static int serviceCode = 0;
 
     private static Gson gson = new Gson();
 
@@ -23,7 +23,7 @@ public class MicroService {
      * Make sure to first set the value of registryAddr, serviceAddr, servicePort,
      * serviceCode
      */
-    protected static boolean register() {
+    protected static boolean register(String registryAddr, String serviceAddr, int servicePort, int serviceCode) {
         HttpURLConnection connection = null;
         try {
             // Create request object
