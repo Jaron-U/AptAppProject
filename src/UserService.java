@@ -51,7 +51,6 @@ public class UserService extends MicroService {
                 published3 = register(registryAddr, baseURL + "/save", 10000, ServiceInfoModel.SERVICE_USER_SAVE);
 
             Thread.sleep(1000);
-            break;
         }
         // Server will only start after the services are registered;
         server.start();
@@ -69,7 +68,6 @@ public class UserService extends MicroService {
         } else {
             System.out.println("Connection to redis db failed!");
         }
-
     }
 
     private static void handleLogin(HttpExchange exchange) throws IOException {
@@ -209,7 +207,7 @@ public class UserService extends MicroService {
     }
 
     /**
-     * Get the request body of http request
+     * Get the request body content of http request
      */
     private static String extractMessage(HttpExchange exchange) throws IOException {
         InputStream is = exchange.getRequestBody();
