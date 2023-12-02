@@ -14,7 +14,7 @@ public class ServiceRegistry {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Hello world!");
+        System.out.println("Service Registry Started");
 
         // Create server at port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
