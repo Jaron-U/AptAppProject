@@ -100,7 +100,7 @@ public class WishListService extends MicroService {
             e.printStackTrace();
         }
         String jsonRes = gson.toJson(wishList);
-        SendJSONResponse(exchange, jsonRes);
+        SendJSONResponse(exchange, jsonRes, false);
     }
 
     private static void handleAdd(HttpExchange exchange) throws IOException {
@@ -130,7 +130,10 @@ public class WishListService extends MicroService {
             e.printStackTrace();
         }
         String jsonRes = gson.toJson(res);
-        SendJSONResponse(exchange, jsonRes);
+        if (res.arg0 != "-1") {
+            SendJSONResponse(exchange, jsonRes, true);
+        } else
+            SendJSONResponse(exchange, jsonRes, false);
     }
 
     private static void handleDelete(HttpExchange exchange) throws IOException {
@@ -157,7 +160,7 @@ public class WishListService extends MicroService {
             e.printStackTrace();
         }
         String jsonRes = gson.toJson(res);
-        SendJSONResponse(exchange, jsonRes);
+        SendJSONResponse(exchange, jsonRes, false);
     }
 
     /**
@@ -175,9 +178,12 @@ public class WishListService extends MicroService {
     /**
      * Send back a http response that contains json content
      */
-    private static void SendJSONResponse(HttpExchange exchange, String jsonRes) throws IOException {
+    private static void SendJSONResponse(HttpExchange exchange, String jsonRes, boolean isPost) throws IOException {
         exchange.getResponseHeaders().set("Content-Type", "application/json");
-        exchange.sendResponseHeaders(200, jsonRes.length());
+        if (isPost)
+            exchange.sendResponseHeaders(201, jsonRes.length());
+        else
+            exchange.sendResponseHeaders(200, jsonRes.length());
         OutputStream os = exchange.getResponseBody();
         os.write(jsonRes.getBytes());
         os.close();
