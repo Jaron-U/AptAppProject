@@ -40,7 +40,7 @@ public class AptMongoDBAdapter {
                 apartment.setPrice(doc.getDouble("price"));
                 apartment.setAvailableDate(doc.getString("availableDate"));
                 apartment.setType(doc.getString("type"));
-                apartment.setDescr(doc.getString("Descr"));
+                apartment.setDescr(doc.getString("descr"));
             }
         } finally {
             mongoClient.close();
