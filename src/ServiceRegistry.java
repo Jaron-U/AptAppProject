@@ -100,8 +100,7 @@ public class ServiceRegistry {
                 return;
             } else {
                 // Get the request info
-                String info = gson.fromJson(msg.data, String.class);
-                int serviceCode = Integer.parseInt(info);
+                int serviceCode = Integer.parseInt(msg.data);
                 System.out.println("seeking service " + serviceCode);
                 List<ServiceInfoModel> list;
                 if (!registry.containsKey(serviceCode)) {
