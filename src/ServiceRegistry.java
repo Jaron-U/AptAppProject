@@ -118,6 +118,7 @@ public class ServiceRegistry {
                     Random rand = new Random();
                     int id = rand.nextInt() % list.size();
                     System.out.println(id);
+                    // Get the Service Info and attach it to the response service message
                     String jsonINFO = gson.toJson(list.get(id));
                     res.data = gson.toJson(jsonINFO);
                 }
