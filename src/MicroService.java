@@ -7,16 +7,10 @@ import com.google.gson.Gson;
 
 /**
  * Base class for micro services
- * 
+ *
  */
 public class MicroService {
-    // These value all needs to be set for service to work
-    // public static String registryAddr = null;
-    // public static String serviceAddr = null;
-    // public static int servicePort = 0;
-    // public static int serviceCode = 0;
-
-    private static Gson gson = new Gson();
+    protected static Gson gson = new Gson();
 
     /**
      * Publish the service, return true if success.
@@ -64,6 +58,10 @@ public class MicroService {
                 reader.close();
 
                 System.out.println("Response Content: " + response.toString());
+                ServiceMessageModel resobj = gson.fromJson(response.toString(), ServiceMessageModel.class);
+                if (resobj.code != ServiceMessageModel.SERVICE_PUBLISH_OK) {
+                    return false;
+                }
                 return true;
             } else {
                 System.out.println("HTTP POST request failed with response code: " + responseCode);
