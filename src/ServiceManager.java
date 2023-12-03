@@ -8,8 +8,8 @@ public class ServiceManager {
     public static Gson gson = new Gson();
     public static String registryURL = "http://localhost:8080/disc";
 
-    private Map<Integer, ServiceInfoModel> _reg; // An internal registry to keep track of services
-    private Set<Integer> pendingService;
+    private Map<Integer, ServiceInfoModel> _reg = new HashMap<>(); // An internal registry to keep track of services
+    private Set<Integer> pendingService = new HashSet<>();
 
     /**
      * Add service code to the list of services that manager will try to discover
@@ -47,6 +47,11 @@ public class ServiceManager {
 
     }
 
+    /**
+     * Try to get service info of a specific serviceCode
+     * If it is not found yet, manager try to discover and return info if
+     * discovered.
+     */
     public ServiceInfoModel getServiceInfo(int serviceCode) {
         if (_reg.containsKey(serviceCode)) {
             System.out.println("Acquired Service info:");
@@ -77,21 +82,21 @@ public class ServiceManager {
         // out.println(userInput);
 
         try {
-
+            // Create request object
             ServiceMessageModel request = new ServiceMessageModel();
             request.code = ServiceMessageModel.SERVICE_DISCOVER_REQUEST;
-            // ServiceInfoModel info = new ServiceInfoModel();
-            // info.serviceCode = id;
-            String jsonINFO = gson.toJson(serviceCode);
-            request.data = jsonINFO;
-
+            String serviceCodeStr = gson.toJson(serviceCode);
+            request.data = serviceCodeStr;
+            // Parser Request object
             String jsonData = gson.toJson(request);
             // Send the request and get response
-            String res = sendJSONReq(registryURL, jsonData);
+            String res = sendJSONReq(registryURL, jsonData,"GET");
             if (res == null) {
                 System.out.println("network failure");
                 return false;
             }
+
+            // Parse response object
             System.out.println("parsing message");
             ServiceMessageModel msg = gson.fromJson(res, ServiceMessageModel.class);
             if (msg.code == ServiceMessageModel.SERVICE_DISCOVER_NOT_FOUND) {
@@ -109,9 +114,11 @@ public class ServiceManager {
             // Add to internal registry if match
             if (info.serviceCode == serviceCode) {
                 _reg.put(serviceCode, info);
+                return true;
             } else {
                 System.out.println("Service code mismatch, is " + info.serviceCode + "should be " + serviceCode);
             }
+            
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,12 +131,13 @@ public class ServiceManager {
      * Send an http request with json body.
      * Return the json response body.
      */
-    protected static String sendJSONReq(String urlString, String jsonData) {
+    protected static String sendJSONReq(String urlString, String jsonData, String reqMethod) {
         HttpURLConnection connection = null;
         try {
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+
+            connection.setRequestMethod(reqMethod);
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -140,7 +148,7 @@ public class ServiceManager {
 
             System.out.println("Request made with url:" + url.toString());
             // Check response
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode == HttpURLConnection.HTTP_OK||responseCode ==HttpURLConnection.HTTP_CREATED) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
