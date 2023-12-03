@@ -57,6 +57,7 @@ public class AptMongoDBAdapter {
             FindIterable<Document> documents = collection.find();
             for (Document doc : documents) {
                 Apartment apt = new Apartment();
+                apt.setId(doc.getObjectId("_id").toString());
                 apt.setAptName(doc.getString("aptName"));
                 apt.setPosterID(doc.getInteger("posterID"));
                 apt.setAddress(doc.getString("address"));
@@ -144,6 +145,7 @@ public class AptMongoDBAdapter {
 
             for (Document doc : documents) {
                 Apartment apt = new Apartment();
+                apt.setId(doc.getObjectId("_id").toString());
                 apt.setAptName(doc.getString("aptName"));
                 apt.setPosterID(doc.getInteger("posterID"));
                 apt.setAddress(doc.getString("address"));
@@ -173,6 +175,7 @@ public class AptMongoDBAdapter {
             FindIterable<Document> documents = collection.find(typeFilter);
             for (Document doc : documents) {
                 Apartment apt = new Apartment();
+                apt.setId(doc.getObjectId("_id").toString());
                 apt.setAptName(doc.getString("aptName"));
                 apt.setPosterID(doc.getInteger("posterID"));
                 apt.setAddress(doc.getString("address"));
