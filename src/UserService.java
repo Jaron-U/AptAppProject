@@ -114,7 +114,7 @@ public class UserService extends MicroService {
             userObj.userID = -1;
         }
         String jsonRes = gson.toJson(userObj);
-        SendJSONResponse(exchange, jsonRes);
+        SendJSONResponse(exchange, jsonRes, false);
     }
 
     /**
@@ -140,6 +140,7 @@ public class UserService extends MicroService {
                 userObj.userID = id;
                 userObj.fullName = jedis.hget(idKey, "displayName");
                 userObj.password = jedis.hget(idKey, "password");
+                userObj.email = jedis.hget(idKey, "email");
                 userObj.wishListID = Integer.parseInt(jedis.hget(idKey, "wishListID"));
             } else {
                 System.out.println("user of id does not exist");
@@ -152,7 +153,7 @@ public class UserService extends MicroService {
             userObj.userID = -1;
         }
         String jsonRes = gson.toJson(userObj);
-        SendJSONResponse(exchange, jsonRes);
+        SendJSONResponse(exchange, jsonRes, false);
 
     }
 
@@ -181,11 +182,11 @@ public class UserService extends MicroService {
                 jedis.set("user2id:" + temp.username, Integer.toString((newID)));
                 // Insert new user
                 jedis.hset("user:" + newID, userData);
-                // Set the return object's user and wishlistID, 
+                // Set the return object's user and wishlistID,
                 temp.userID = newID;
                 temp.wishListID = newID;
                 // Send
-                SendJSONResponse(exchange, gson.toJson(temp));
+                SendJSONResponse(exchange, gson.toJson(temp), true);
                 return;
             } else {
                 System.out.println("Username: " + temp.username + " already exist");
@@ -194,14 +195,14 @@ public class UserService extends MicroService {
         } catch (Exception e) {
             User empty = new User();
             empty.userID = -1;
-            SendJSONResponse(exchange, gson.toJson(empty));
+            SendJSONResponse(exchange, gson.toJson(empty), false);
             e.printStackTrace();
             return;
         }
         // This will be reached if the username already exist
         User empty = new User();
         empty.userID = -1;
-        SendJSONResponse(exchange, gson.toJson(empty));
+        SendJSONResponse(exchange, gson.toJson(empty), false);
         return;
 
     }
@@ -221,9 +222,12 @@ public class UserService extends MicroService {
     /**
      * Send back a http response that contains json content
      */
-    private static void SendJSONResponse(HttpExchange exchange, String jsonRes) throws IOException {
+    private static void SendJSONResponse(HttpExchange exchange, String jsonRes, boolean isPost) throws IOException {
         exchange.getResponseHeaders().set("Content-Type", "application/json");
-        exchange.sendResponseHeaders(200, jsonRes.length());
+        if (isPost)
+            exchange.sendResponseHeaders(201, jsonRes.length());
+        else
+            exchange.sendResponseHeaders(200, jsonRes.length());
         OutputStream os = exchange.getResponseBody();
         os.write(jsonRes.getBytes());
         os.close();
