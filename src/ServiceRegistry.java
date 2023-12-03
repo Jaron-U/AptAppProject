@@ -119,8 +119,7 @@ public class ServiceRegistry {
                     int id = rand.nextInt() % list.size();
                     System.out.println(id);
                     // Get the Service Info and attach it to the response service message
-                    String jsonINFO = gson.toJson(list.get(id));
-                    res.data = gson.toJson(jsonINFO);
+                    res.data = gson.toJson(list.get(id));
                 }
 
             }
@@ -129,6 +128,7 @@ public class ServiceRegistry {
         }
         // Send the response
         String jsonRes = gson.toJson(res);
+        System.out.println(jsonRes);
         exchange.getResponseHeaders().set("Content-Type", "application/json");
         exchange.sendResponseHeaders(200, jsonRes.length());
         OutputStream os = exchange.getResponseBody();
