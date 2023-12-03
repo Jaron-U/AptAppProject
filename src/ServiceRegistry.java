@@ -115,7 +115,7 @@ public class ServiceRegistry {
                     res.code = ServiceMessageModel.SERVICE_DISCOVER_OK;
                     // Get a random service info
                     Random rand = new Random();
-                    int id = rand.nextInt() % list.size();
+                    int id = rand.nextInt(list.size());
                     System.out.println(id);
                     // Get the Service Info and attach it to the response service message
                     res.data = gson.toJson(list.get(id));
