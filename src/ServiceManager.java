@@ -90,7 +90,7 @@ public class ServiceManager {
             // Parser Request object
             String jsonData = gson.toJson(request);
             // Send the request and get response
-            String res = sendJSONReq(registryURL, jsonData,"GET");
+            String res = sendJSONReq(registryURL, jsonData, "GET");
             if (res == null) {
                 System.out.println("network failure");
                 return false;
@@ -118,7 +118,6 @@ public class ServiceManager {
             } else {
                 System.out.println("Service code mismatch, is " + info.serviceCode + "should be " + serviceCode);
             }
-            
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,9 +128,9 @@ public class ServiceManager {
 
     /**
      * Send an http request with json body.
-     * Return the json response body.
+     * Return the json response body and print the content.
      */
-    protected static String sendJSONReq(String urlString, String jsonData, String reqMethod) {
+    public static String sendJSONReq(String urlString, String jsonData, String reqMethod) {
         HttpURLConnection connection = null;
         try {
             URL url = new URL(urlString);
@@ -148,7 +147,7 @@ public class ServiceManager {
 
             System.out.println("Request made with url:" + url.toString());
             // Check response
-            if (responseCode == HttpURLConnection.HTTP_OK||responseCode ==HttpURLConnection.HTTP_CREATED) {
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
@@ -170,5 +169,42 @@ public class ServiceManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String sendDirectRequest(String uString, String methodString) {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(uString);
+            BufferedReader reader = null;
+            // Open a connection to the URL
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set request method
+            connection.setRequestMethod(methodString);
+
+            // Get the response code
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            // Read the response from the API
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+
+                System.out.println("Response Body: " + response.toString());
+                return response.toString();
+            } else {
+                System.out.println("Error in HTTP request, Response Code: " + responseCode);
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
