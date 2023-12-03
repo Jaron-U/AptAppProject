@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Apartment {
 
-//    private String ID;
+    private String id;
     private String aptName;
     private int posterID;
     private String address;
@@ -14,15 +14,14 @@ public class Apartment {
     private String availableDate;
     private String Type;
     private String Descr; // Description
-    // private String
 
-//    public String getID() {
-//        return ID;
-//    }
-//
-//    public void setID(String iD) {
-//        ID = iD;
-//    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getPosterID() {
         return posterID;
