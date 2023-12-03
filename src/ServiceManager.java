@@ -24,9 +24,27 @@ public class ServiceManager {
      * Usually should be called at initialization
      */
     public void discoverAll() {
-        for(int code :pendingService){
-            discover(code);
+        System.out.println("trying to discover all added service ");
+        Iterator<Integer> iterator = pendingService.iterator();
+
+        // Iterate through it and discover, if discovered remove from pending
+        while (iterator.hasNext()) {
+            int serviceCode = iterator.next();
+            System.out.print(serviceCode + ", ");
+            if (discover(serviceCode)) {
+                iterator.remove(); // Remove even numbers from the set
+            }
         }
+        if (pendingService.isEmpty()) {
+            System.out.println("All found");
+        } else {
+            for (int code : pendingService) {
+                System.out.print(code + ", ");
+            }
+            System.out.print("\n");
+
+        }
+
     }
 
     public ServiceInfoModel getServiceInfo(int serviceCode) {
