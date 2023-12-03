@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 
 /**
  * Base class for micro services
- * 
+ *
  */
 public class MicroService {
     protected static Gson gson = new Gson();

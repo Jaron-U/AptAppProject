@@ -4,24 +4,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Apartment {
-    public int ID;
-    public String aptName;
-    public int posterID;
-    public String address;
-    public double area;
-    public double price;
-    public String availableDate;
-    public String Type;
-    public String Descr; // Description
+
+//    private String ID;
+    private String aptName;
+    private int posterID;
+    private String address;
+    private double area;
+    private double price;
+    private String availableDate;
+    private String Type;
+    private String Descr; // Description
     // private String
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int iD) {
-        ID = iD;
-    }
+//    public String getID() {
+//        return ID;
+//    }
+//
+//    public void setID(String iD) {
+//        ID = iD;
+//    }
 
     public int getPosterID() {
         return posterID;
