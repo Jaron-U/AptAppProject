@@ -1,4 +1,174 @@
 
+/*body, select, input, button {*/
+/*    font-family: Arial, sans-serif;*/
+/*    font-size: 20px;*/
+/*}*/
+
+/*body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    min-height: 100vh;*/
+/*    background-color: #f2f2f2;*/
+/*}*/
+
+/*.navbar {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    padding: 20px;*/
+/*    background-color: #daa520;*/
+/*    color: white;*/
+/*    flex-wrap: nowrap;*/
+/*}*/
+
+/*.navigation {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.navigation .nav-link {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    padding: 0 10px;*/
+/*}*/
+
+/*@media screen and (max-width: 600px) {*/
+/*    .navigation .nav-link {*/
+/*        padding: 0 5px;*/
+/*    }*/
+
+/*    .navbar {*/
+/*        flex-direction: column;*/
+/*        align-items: flex-start;*/
+/*    }*/
+
+/*    .navigation {*/
+/*        flex-direction: column;*/
+/*        align-items: flex-start;*/
+/*    }*/
+/*}*/
+
+/*#userDisplay {*/
+/*    color: black;*/
+/*}*/
+
+/*.search-bar {*/
+/*    margin-top: 20px;*/
+/*    margin-right: auto; !* 右边距设置为自动 *!*/
+/*    margin-left: auto;  !* 左边距设置为自动 *!*/
+/*    border-radius: 10px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    padding: 20px;*/
+/*    background-color: #dfdfdf;*/
+/*    width: 80%; !* 设置一个固定宽度 *!*/
+/*}*/
+
+/*.input-group {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.price-range-group {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin-right: 20px; !* 在元素之间添加间隔 *!*/
+/*}*/
+
+/*.price-inputs {*/
+/*    display: flex;*/
+/*    gap: 10px; !* 在两个输入框之间添加间隔 *!*/
+/*}*/
+
+/*.label-small {*/
+/*    font-size: 0.8em; !* 较小的字体大小 *!*/
+/*    margin-bottom: 5px; !* 为标签添加下边距 *!*/
+/*}*/
+
+/*!* 调整输入框宽度 *!*/
+/*.price-inputs input[type="text"] {*/
+/*    flex: 1; !* 确保输入框平分可用空间 *!*/
+/*}*/
+
+/*input[type="text"], select {*/
+/*    padding: 10px;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 10px;*/
+/*    background-color: #fff;*/
+/*}*/
+
+/*input[type="text"]:focus, select:focus {*/
+/*    outline: none;*/
+/*    border-color: #5cb85c;*/
+/*}*/
+
+/*button {*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    background-color: #5cb85c;*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*button:hover {*/
+/*    background-color: #449d44;*/
+/*}*/
+
+/*.search-btn{*/
+/*    margin-left: auto;*/
+/*}*/
+
+/*.listing-container {*/
+/*    flex-grow: 1;*/
+/*    display: flex;*/
+/*    padding: 20px;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.listing {*/
+/*    width: 80%;*/
+/*    background-color: white;*/
+/*    border: 1px solid #ddd;*/
+/*    padding: 35px;*/
+/*    margin-bottom: 10px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+/*}*/
+
+/*.apartment-name {*/
+/*    font-weight: bold;*/
+/*    color: #333;*/
+/*}*/
+
+/*.apartment-price {*/
+/*    color: green;*/
+/*}*/
+
+/*.apartment-type {*/
+/*    color: blue;*/
+/*}*/
+
+/*.apartment-address {*/
+/*    color: #666;*/
+/*}*/
+
+
+/*.footer {*/
+/*    text-align: center;*/
+/*    padding: 20px;*/
+/*    background-color: #daa520;*/
+/*    color: white;*/
+/*    position: sticky;*/
+/*    bottom: 0;*/
+/*}*/
+
+
 body, select, input, button {
     font-family: Arial, sans-serif;
     font-size: 20px;
@@ -19,7 +189,6 @@ body {
     padding: 20px;
     background-color: #daa520;
     color: white;
-    flex-wrap: nowrap;
 }
 
 .navigation {
@@ -37,12 +206,10 @@ body {
     .navigation .nav-link {
         padding: 0 5px;
     }
-
     .navbar {
         flex-direction: column;
         align-items: flex-start;
     }
-
     .navigation {
         flex-direction: column;
         align-items: flex-start;
@@ -55,31 +222,52 @@ body {
 
 .search-bar {
     margin-top: 20px;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-right: auto;
+    margin-left: auto;
     border-radius: 10px;
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
     padding: 20px;
     background-color: #dfdfdf;
-    align-items: center;
+    width: 80%;
 }
 
 .input-group {
     display: flex;
-    flex-grow: 1;
+    align-items: end;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.input-group > * {
-    margin-right: 10px;
+.price-inputs {
+    display: flex;
+    gap: 10px;
 }
 
-.input-group > *:last-child {
-    margin-right: 0;
+.price-inputs input[type="text"] {
+    flex: 1;
 }
 
-.search-bar > * {
-    margin-right: 10px;
+.price-range-group, .type-select {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.price-inputs input[type="text"], .type-select select {
+    flex: 1;
+    margin-top: 5px;
+}
+
+.label-small {
+    font-size: 0.8em;
+    align-self: start;
+}
+
+.input-group > button {
+    flex-grow: 0;
+    margin-left: 10px;
 }
 
 input[type="text"], select {
@@ -108,22 +296,45 @@ button:hover {
     background-color: #449d44;
 }
 
-.search-btn{
+.search-btn {
+    padding: 10px 20px;
+    align-self: end;
     margin-left: auto;
 }
 
 .listing-container {
     flex-grow: 1;
+    display: flex;
     padding: 20px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .listing {
+    width: 80%;
     background-color: white;
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 35px;
     margin-bottom: 10px;
-    border-radius: 4px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.apartment-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.apartment-price {
+    color: green;
+}
+
+.apartment-type {
+    color: blue;
+}
+
+.apartment-address {
+    color: #666;
 }
 
 .footer {

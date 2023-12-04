@@ -19,17 +19,27 @@
         <div class="nav-link" id="userDisplay" style="display: none;"></div>
     </div>
 </div>
+
 <div class="search-bar">
     <div class="input-group">
-        <input type="text" id="lowPrice" placeholder="Min Price">
-        <input type="text" id="highPrice" placeholder="Max Price">
-        <select name="type" id="type">
-            <option value="1b1b">1b1b</option>
-            <option value="2b2b">2b2b</option>
-        </select>
+        <div class="price-range-group">
+            <label for="lowPrice" class="label-small">Price Range</label>
+            <div class="price-inputs">
+                <input type="text" id="lowPrice" placeholder="Min Price">
+                <input type="text" id="highPrice" placeholder="Max Price">
+            </div>
+        </div>
+        <div class="type-select">
+            <label for="type" class="label-small">Type</label>
+            <select name="type" id="type">
+                <option value="1b1b">1b1b</option>
+                <option value="2b2b">2b2b</option>
+            </select>
+        </div>
+        <button id="search-button" class="button search-btn">Save</button>
     </div>
-    <button id="search-button" class="button search-btn">Search</button>
 </div>
+
 <div class="listing-container">
     <div id="loadingMessage">No Apartments Data</div>
 </div>

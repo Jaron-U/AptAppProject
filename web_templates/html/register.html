@@ -3,7 +3,7 @@
 <head>
     <title>Apartment Application</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
-    <script type="module" src="/js/login.js"></script>
+    <script type="module" src="/js/register.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -18,19 +18,27 @@
 
 <div class="listing-container">
     <div class="login-container">
-        <h2>Apartment Application</h2>
-        <form id="loginForm" action="/login" method="post">
+        <h2>Register As New User</h2>
+        <form id="registerForm" action="/register" method="post">
             <div class="input-group">
                 <label>Username</label>
                 <input type="text" name="username" required>
             </div>
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" name="password" required>
+                <input type="text" name="password" required>
+            </div>
+            <div class="input-group">
+                <label>Fall Name</label>
+                <input type="text" name="fullName" required>
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
             </div>
             <div class="buttons">
-                <button type="submit">Login</button>
-                <button id="goToRegister" type="button">Register</button>
+                <button type="submit">Register And Login</button>
+                <button id="cancelRegister"  type="button">Cancel</button>
             </div>
         </form>
     </div>

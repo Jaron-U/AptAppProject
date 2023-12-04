@@ -1,27 +1,27 @@
 import ServiceMessageModel from '/js/ServiceMessageModel.js';
 import ServiceInfoModel from "/js/ServiceInfoModel.js";
 
-$(document).ready(function(){
-    $("#loginForm").submit(function(event){
+$(document).ready(function() {
+    $("#registerForm").submit(function (event) {
         event.preventDefault();
         var getServiceString = "http://localhost:8080/disc"
 
         var username = $("input[name='username']").val();
         var password = $("input[name='password']").val();
+        var fullName = $("input[name='fullName']").val();
+        var email = $("input[name='email']").val();
 
-        //request message to get the load service
-        let loadServiceReqMsg =
-            new ServiceMessageModel(ServiceMessageModel.SERVICE_DISCOVER_REQUEST,
-            ServiceInfoModel.SERVICE_USER_LOGIN);
-
-        // get the service url
-        async function fetchServiceData() {
+        // get the user register service url
+        async function fetchServiceUrl() {
             try {
                 let response = await $.ajax({
                     url: getServiceString,
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify(loadServiceReqMsg),
+                    data: JSON.stringify({
+                        code: ServiceMessageModel.SERVICE_DISCOVER_REQUEST,
+                        data: ServiceInfoModel.SERVICE_USER_SAVE
+                    }),
                 });
                 if (response.code === 202){
                     alert("Service Not Found");
@@ -34,21 +34,25 @@ $(document).ready(function(){
             }
         }
 
-        // send the login request
-        async function handleData() {
-            let requestURL = await fetchServiceData();
+        // send the register request
+        async function registerReq() {
+            let requestURL = await fetchServiceUrl();
             console.log(requestURL);
+            console.log(fullName);
             $.ajax({
                 url: requestURL,
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
                     username: username,
-                    password: password
+                    password: password,
+                    fullName: fullName,
+                    email: email
                 }),
                 success: function(response) {
+                    console.log(response)
                     if (response.userID === -1){
-                        alert("Username or Password is not correct");
+                        alert("Register Failed");
                     } else {
                         console.log(response)
                         localStorage.setItem('user', JSON.stringify(response));
@@ -61,13 +65,11 @@ $(document).ready(function(){
                 }
             });
         }
-
-        handleData();
-
+        registerReq()
     });
-
-    $("#goToRegister").click(function(event){
+    // if user cancel it
+    $("#cancelRegister").click(function(event){
         event.preventDefault();
-        window.location.href = '/register.html';
+        window.location.href = '/login.html';
     });
-});
+})

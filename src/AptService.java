@@ -16,7 +16,7 @@ public class AptService extends MicroService{
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8086), 0);
 
-        server.createContext("/apt", AptService::handleRequestApt);
+        server.createContext("/apt", AptService::handleRequestApt).getFilters().add(new CORSFilter());
         boolean aptServiceGetOne = register(registryAddr, baseURL + "/apt", 8086, ServiceInfoModel.SERVICE_APT_LOAD);
         boolean aptServiceCreateOne = register(registryAddr, baseURL + "/apt", 8086, ServiceInfoModel.SERVICE_APT_SAVE);
         boolean aptServiceGetAll = register(registryAddr, baseURL + "/apt", 8086, ServiceInfoModel.SERVICE_APT_LOADALL);
