@@ -24,6 +24,9 @@ public class ServiceRegistry {
         HttpContext product = server.createContext("/disc");
         product.setHandler(ServiceRegistry::handleDisc);
 
+        // handle the CORS error
+        product.getFilters().add(new CORSFilter());
+
         server.start();
     }
 

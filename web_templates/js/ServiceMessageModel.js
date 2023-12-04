@@ -8,10 +8,7 @@ class ServiceMessageModel {
     static SERVICE_DISCOVER_NOT_FOUND = 202;
     static SERVICE_DISCOVER_OK = 203;
 
-    constructor(code, data) {
-        this.code = code;
-        this.data = data;
-    }
+    constructor(code, data) {this.code = code; this.data = data;}
 }
 
 export default ServiceMessageModel;

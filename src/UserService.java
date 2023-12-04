@@ -52,6 +52,12 @@ public class UserService extends MicroService {
 
             Thread.sleep(1000);
         }
+
+        // handle the CORS error
+        loginAPI.getFilters().add(new CORSFilter());
+        loadAPI.getFilters().add(new CORSFilter());
+        saveAPI.getFilters().add(new CORSFilter());
+
         // Server will only start after the services are registered;
         server.start();
     }

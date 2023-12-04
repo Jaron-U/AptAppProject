@@ -1,23 +1,62 @@
+import ServiceMessageModel from '/js/ServiceMessageModel.js';
+import ServiceInfoModel from "/js/ServiceInfoModel.js";
+
 $(document).ready(function(){
     $("form").submit(function(event){
+        console.log("11111")
         event.preventDefault();
+        var getServiceString = "http://localhost:8080/disc"
 
         var username = $("input[name='username']").val();
         var password = $("input[name='password']").val();
 
-        $.ajax({
-            url: '/login',
-            type: 'post',
-            data: {
-                username: username,
-                password: password
-            },
-            success: function(response){
-                console.log(response);
-            },
-            error: function(xhr, status, error){
+        //request message to get the load service
+        let loadServiceReqMsg =
+            new ServiceMessageModel(ServiceMessageModel.SERVICE_DISCOVER_REQUEST,
+            ServiceInfoModel.SERVICE_USER_LOGIN);
+
+        // get the service url
+        async function fetchServiceData() {
+            try {
+                let response = await $.ajax({
+                    url: getServiceString,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(loadServiceReqMsg),
+                });
+                if (response.code === 202){
+                    alert("Service Not Found");
+                }
+                var serviceData = JSON.parse(response.data);
+                return serviceData.serviceHostAddress;
+            } catch (error) {
                 console.log(error);
             }
-        });
+        }
+
+        // send the login request
+        async function handleData() {
+            let requestURL = await fetchServiceData();
+            console.log(requestURL);
+            $.ajax({
+                url: requestURL,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    username: username,
+                    password: password
+                }),
+                success: function(response) {
+                    console.log(response)
+                    localStorage.setItem('user', JSON.stringify(response));
+                },
+                error: function(error) {
+                    console.log(error)
+                }
+            });
+        }
+
+        handleData();
+
     });
 });

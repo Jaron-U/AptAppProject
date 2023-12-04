@@ -22,12 +22,11 @@ public class WebClient {
     }
 
     static class StaticFileHandler implements HttpHandler {
-        private final String root = "web_templates"; // 根目录
+        private final String root = "web_templates";
 
         public void handle(HttpExchange exchange) throws IOException {
             String path = exchange.getRequestURI().getPath();
 
-            // 根据请求的文件类型调整文件路径
             String filePath;
             if (path.endsWith(".html") || path.equals("/")) {
                 filePath = root + "/html" + (path.equals("/") ? "/index.html" : path);
@@ -37,14 +36,12 @@ public class WebClient {
 
             File file = new File(filePath).getCanonicalFile();
 
-            // 安全性检查
             if (!file.getPath().startsWith(new File(root).getCanonicalPath())) {
                 send404(exchange);
                 return;
             }
 
             if (file.isFile()) {
-                // 设置MIME类型
                 String mime = Files.probeContentType(file.toPath());
                 exchange.getResponseHeaders().set("Content-Type", mime != null ? mime : "application/octet-stream");
                 exchange.sendResponseHeaders(200, file.length());
@@ -69,6 +66,5 @@ public class WebClient {
             }
         }
     }
-
 }
 
