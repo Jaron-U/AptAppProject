@@ -3,7 +3,6 @@ import ServiceInfoModel from "/js/ServiceInfoModel.js";
 
 $(document).ready(function(){
     $("form").submit(function(event){
-        console.log("11111")
         event.preventDefault();
         var getServiceString = "http://localhost:8080/disc"
 
@@ -47,10 +46,16 @@ $(document).ready(function(){
                     password: password
                 }),
                 success: function(response) {
-                    console.log(response)
-                    localStorage.setItem('user', JSON.stringify(response));
+                    if (response.userID === -1){
+                        alert("Username or Password is not correct");
+                    } else {
+                        console.log(response)
+                        localStorage.setItem('user', JSON.stringify(response));
+                        window.location.href = '/index.html';
+                    }
                 },
                 error: function(error) {
+                    alert("Username or Password is not correct");
                     console.log(error)
                 }
             });

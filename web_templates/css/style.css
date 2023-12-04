@@ -19,16 +19,38 @@ body {
     padding: 20px;
     background-color: #daa520;
     color: white;
+    flex-wrap: nowrap;
 }
 
-.title {
-    font-size: 22px;
+.navigation {
+    display: flex;
+    align-items: center;
 }
 
 .navigation .nav-link {
     color: white;
     text-decoration: none;
-    padding: 0 15px;
+    padding: 0 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .navigation .nav-link {
+        padding: 0 5px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+#userDisplay {
+    color: black;
 }
 
 .search-bar {
