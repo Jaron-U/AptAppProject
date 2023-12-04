@@ -1,0 +1,114 @@
+
+body, select, input, button {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #daa520;
+    color: white;
+}
+
+.title {
+    font-size: 22px;
+}
+
+.navigation .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+.search-bar {
+    margin-top: 20px;
+    margin-right: 50px;
+    margin-left: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+    background-color: #dfdfdf;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-grow: 1;
+}
+
+.input-group > * {
+    margin-right: 10px;
+}
+
+.input-group > *:last-child {
+    margin-right: 0;
+}
+
+.search-bar > * {
+    margin-right: 10px;
+}
+
+input[type="text"], select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #5cb85c;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #449d44;
+}
+
+.search-btn{
+    margin-left: auto;
+}
+
+.listing-container {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.listing {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #daa520;
+    color: white;
+    position: sticky;
+    bottom: 0;
+}
