@@ -2,6 +2,11 @@ import ServiceMessageModel from '/js/ServiceMessageModel.js';
 import ServiceInfoModel from "/js/ServiceInfoModel.js";
 
 $(document).ready(function() {
+    $('#wishListLink').click(function (event) {
+        alert("Please Login First")
+        event.preventDefault()
+    })
+
     $("#registerForm").submit(function (event) {
         event.preventDefault();
         var getServiceString = "http://localhost:8080/disc"

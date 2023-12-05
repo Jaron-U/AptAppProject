@@ -16,6 +16,13 @@ $(document).ready(function() {
         });
     }
 
+    $('#wishListLink').click(function (event) {
+        if (!storedUserData) {
+            alert("Please Login First")
+            event.preventDefault()
+        }
+    })
+
     $("#postAptForm").submit(function (event) {
         event.preventDefault();
         let storedUserData = localStorage.getItem('user');

@@ -16,6 +16,13 @@ $(document).ready(function() {
         });
     }
 
+    $('#wishListLink').click(function (event) {
+        if (!storedUserData) {
+            alert("Please Login First")
+            event.preventDefault()
+        }
+    })
+
     let selectedAptId = localStorage.getItem('selectedApartmentId');
     if (selectedAptId) {
         fetchAptById(selectedAptId)

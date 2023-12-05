@@ -21,6 +21,13 @@ $(document).ready(function() {
         $('#userDisplay').hide();
     }
 
+    $('#wishListLink').click(function (event) {
+        if (!storedUserData) {
+            alert("Please Login First")
+            event.preventDefault()
+        }
+    })
+
     fetchAllApartments();
 
     $('#search-button').click(function() {
@@ -42,7 +49,6 @@ $(document).ready(function() {
         localStorage.setItem('selectedApartmentId', apartmentId);
         location.href = 'aptDetail.html';
     });
-
 });
 
 function fetchAllApartments() {
