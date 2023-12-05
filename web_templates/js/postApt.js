@@ -2,15 +2,26 @@ import ServiceMessageModel from '/js/ServiceMessageModel.js';
 import ServiceInfoModel from "/js/ServiceInfoModel.js";
 
 $(document).ready(function() {
+    let storedUserData = localStorage.getItem('user');
+    if (storedUserData) {
+        let userObject = JSON.parse(storedUserData);
+        $('#loginLink').hide(); // hide the login link
+        $('#logoutLink').show(); // show the logout button
+        $('#userDisplay').text(userObject.fullName).show(); // show the usename
+
+        // logout
+        $('#logoutLink').click(function () {
+            localStorage.clear(); // clean local storage
+            location.reload();
+        });
+    }
+
     $("#postAptForm").submit(function (event) {
         event.preventDefault();
         let storedUserData = localStorage.getItem('user');
-        console.log(1111)
         if (!storedUserData) {
             alert("Please Login First!");
         } else {
-            let userObject = JSON.parse(storedUserData);
-
             var getServiceString = "http://localhost:8080/disc"
 
             var aptName = $("input[name='aptName']").val();

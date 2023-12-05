@@ -3,7 +3,7 @@
 <head>
     <title>Apartment Application</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
-    <script type="module" src="/js/postApt.js"></script>
+    <script type="module" src="/js/aptDetail.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -21,44 +21,39 @@
 
 <div class="listing-container">
     <div class="login-container">
-        <h2>Post An Apartment</h2>
-        <form id="postAptForm" action="/postApt" method="post">
+        <h2>Apartment Detail</h2>
+        <form id="addWishListForm" action="/addWishList" method="post">
             <div class="input-group">
-                <label>Apartment Name</label>
-                <input type="text" name="aptName" required>
+                <label>Apartment Name:</label>
+                <div id="aptNameContainer" class="apt-detail"></div>
             </div>
             <div class="input-group">
-                <label>Address</label>
-                <input type="text" name="address" required>
+                <label>Address:</label>
+                <div id="addressContainer" class="apt-detail"></div>
             </div>
             <div class="input-group">
-                <label>Apartment Price ($ Monthly)</label>
-                <input type="number" name="price" step="0.01" required>
+                <label>Apartment Price ($ Monthly):</label>
+                <div id="priceContainer" class="apt-detail"></div>
             </div>
             <div class="input-group">
-                <label>Type</label>
-                <select name="type" id="type" required>
-                    <option value="">Select Type</option>
-                    <option value="1b1b">1b1b</option>
-                    <option value="2b2b">2b2b</option>
-                </select>
+                <label>Type:</label>
+                <div id="typeContainer" class="apt-detail"></div>
             </div>
             <div class="input-group">
-                <label>Apartment Area (sq.ft)</label>
-                <input type="number" name="area" step="0.01" required>
+                <label>Apartment Area (sq.ft):</label>
+                <div id="areaContainer" class="apt-detail"></div>
             </div>
             <div class="input-group">
-                <label>Available Date</label>
-                <input type="date" name="availableDate" required>
+                <label>Available Date:</label>
+                <div id="dateContainer" class="apt-detail"></div>
             </div>
             <div class="input-group">
-                <label>Description</label>
-                <textarea id="descr" name="descr" rows="4" cols="50"></textarea>
+                <label>Description:</label>
+                <div id="descrContainer" class="apt-detail"></div>
             </div>
 
             <div class="buttons">
-                <button type="submit">Post</button>
-                <button id="cancelPost" type="button">Cancel</button>
+                <button type="submit">Add To Wish List</button>
             </div>
         </form>
     </div>

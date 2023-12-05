@@ -3,6 +3,7 @@ import ServiceInfoModel from "/js/ServiceInfoModel.js";
 
 $(document).ready(function() {
     let storedUserData = localStorage.getItem('user');
+    localStorage.removeItem('selectedApartmentId');
     if (storedUserData) {
         let userObject = JSON.parse(storedUserData);
         $('#loginLink').hide(); // hide the login link
@@ -34,6 +35,14 @@ $(document).ready(function() {
             fetchAptsByType(type);
         }
     });
+
+    $('.listing-container').on('click', '.listing', function() {
+        const apartmentId = $(this).data('id');
+        console.log(apartmentId);
+        localStorage.setItem('selectedApartmentId', apartmentId);
+        location.href = 'aptDetail.html';
+    });
+
 });
 
 function fetchAllApartments() {
@@ -72,7 +81,7 @@ function fetchAllApartments() {
                 let listingsHtml = '';
                 apartments.forEach(apartment => {
                     listingsHtml += `
-                        <div class="listing">
+                        <div class="listing" data-id='${apartment.id}'>
                             <span class="apartment-name">Apartment Name: ${apartment.aptName}</span> -- 
                             <span class="apartment-price">Price: $${apartment.price}</span> -- 
                             <span class="apartment-type">Type: ${apartment.Type}</span> -- 
@@ -130,7 +139,7 @@ function fetchAptsByPrice(minPrice, maxPrice) {
                 let listingsHtml = '';
                 apartments.forEach(apartment => {
                     listingsHtml += `
-                        <div class="listing">
+                        <div class="listing" data-id='${apartment.id}'>
                             <span class="apartment-name">Apartment Name: ${apartment.aptName}</span> -- 
                             <span class="apartment-price">Price: $${apartment.price}</span> -- 
                             <span class="apartment-type">Type: ${apartment.Type}</span> -- 
@@ -185,7 +194,7 @@ function fetchAptsByType(type) {
                 let listingsHtml = '';
                 apartments.forEach(apartment => {
                     listingsHtml += `
-                        <div class="listing">
+                        <div class="listing" data-id='${apartment.id}'>
                             <span class="apartment-name">Apartment Name: ${apartment.aptName}</span> -- 
                             <span class="apartment-price">Price: $${apartment.price}</span> -- 
                             <span class="apartment-type">Type: ${apartment.Type}</span> -- 
