@@ -8,7 +8,7 @@ public class DT_RegisterScreen extends JFrame {
     private JTextField txtUserName = new JTextField(10);
     private JTextField txtPassword = new JTextField(10);
     private JTextField txtEmail = new JTextField(10);
-    private JTextField txtFullName  = new JTextField(10);
+    private JTextField txtFullName = new JTextField(10);
 
     public JTextField getTxtFullName() {
         return txtFullName;
@@ -29,11 +29,20 @@ public class DT_RegisterScreen extends JFrame {
     private JButton btnReg = new JButton("Register");
 
     public DT_RegisterScreen() {
+        
+        Color lightBlue = new Color(230, 246, 250);
+        this.setBackground(lightBlue);
 
-        this.setSize(300, 220);
+        this.setSize(300, 270);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-
-        this.getContentPane().add(new JLabel("New User Register"));
+        
+        JPanel titlePanel = new JPanel();
+        JLabel title = new JLabel("New User Register");
+        Font titleFont = new Font(title.getFont().getName(), Font.BOLD, 18);
+        title.setFont(titleFont);
+        titlePanel.add(title);
+        titlePanel.setBackground(lightBlue);
+        this.getContentPane().add(titlePanel);
 
         JPanel main = new JPanel(new SpringLayout());
         main.add(new JLabel("Username:"));
@@ -44,6 +53,7 @@ public class DT_RegisterScreen extends JFrame {
         main.add(txtEmail);
         main.add(new JLabel("Preferred Name:"));
         main.add(txtFullName);
+        main.setBackground(lightBlue);
 
         SpringUtilities.makeCompactGrid(main,
                 4, 2, // rows, cols
@@ -52,6 +62,7 @@ public class DT_RegisterScreen extends JFrame {
 
         JPanel buttons = new JPanel();
         buttons.add(btnReg);
+        buttons.setBackground(lightBlue);
 
         this.getContentPane().add(main);
         this.getContentPane().add(buttons);
