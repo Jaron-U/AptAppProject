@@ -29,7 +29,11 @@ public class DT_LoginScreen extends JFrame {
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         JPanel titlePanel = new JPanel();
-        titlePanel.add(new JLabel("Rental Sharing System"));
+        JLabel title = new JLabel("Rental Sharing System");
+        Font titleFont = new Font(title.getFont().getName(), Font.BOLD, 18);
+        title.setFont(titleFont);
+        titlePanel.add(title);
+
         titlePanel.setBackground(lightBlue);
         this.getContentPane().add(titlePanel);
 
