@@ -26,11 +26,13 @@ $(document).ready(function() {
         let minPrice = $('#lowPrice').val();
         let maxPrice = $('#highPrice').val();
         let type = $('#type').val();
-        if (minPrice != null && maxPrice != null) {
+        if (minPrice !== "" && maxPrice !== "") {
             // get apts list within this price range
             fetchAptsByPrice(minPrice, maxPrice);
+        } else if (type != null) {
+            // get apts list by type
+            fetchAptsByType(type);
         }
-
     });
 });
 
@@ -112,7 +114,7 @@ function fetchAptsByPrice(minPrice, maxPrice) {
             console.log(error);
         }
     }
-    async function fetchAptsByPriceDate() {
+    async function fetchAptsByPriceData() {
         let requestURL = await fetchServiceURL();
         console.log(requestURL);
         $.ajax({
@@ -143,7 +145,61 @@ function fetchAptsByPrice(minPrice, maxPrice) {
             }
         });
     }
-    fetchAptsByPriceDate()
+    fetchAptsByPriceData()
 }
 
+function fetchAptsByType(type) {
+    var serviceRegistryURL = "http://localhost:8080/disc"
+    // get the apartment service url
+    async function fetchServiceURL() {
+        try {
+            let response = await $.ajax({
+                url: serviceRegistryURL,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    code: ServiceMessageModel.SERVICE_DISCOVER_REQUEST,
+                    data: ServiceInfoModel.SERVICE_APT_SEARCH_TYPE
+                }),
+            });
+            if (response.code === 202){
+                alert("Service Not Found");
+            } else {
+                var serviceData = JSON.parse(response.data);
+                return serviceData.serviceHostAddress;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async function fetchAptsByTypeData() {
+        let requestURL = await fetchServiceURL();
+        requestURL += ("/" + type)
+        console.log(requestURL)
+        $.ajax({
+            url: requestURL,
+            type: 'GET',
+            success: function (response) {
+                let apartments = JSON.parse(response)
+                console.log(apartments)
+                let listingsHtml = '';
+                apartments.forEach(apartment => {
+                    listingsHtml += `
+                        <div class="listing">
+                            <span class="apartment-name">Apartment Name: ${apartment.aptName}</span> -- 
+                            <span class="apartment-price">Price: $${apartment.price}</span> -- 
+                            <span class="apartment-type">Type: ${apartment.Type}</span> -- 
+                            <span class="apartment-address">Address: ${apartment.address}</span>
+                        </div>
+                    `;
+                });
+                $('.listing-container').html(listingsHtml);
+            },
+            error: function (error) {
+                console.error('Error fetching apartment data:', error);
+            }
+        });
+    }
+    fetchAptsByTypeData()
+}
 
