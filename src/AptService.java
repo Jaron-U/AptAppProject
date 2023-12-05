@@ -24,13 +24,13 @@ public class AptService extends MicroService{
             System.out.println("error to register aptService");
         }
 
-        server.createContext("/apt/findAptByPrice", AptService::handleRequestFindAptsByPrice);
+        server.createContext("/apt/findAptByPrice", AptService::handleRequestFindAptsByPrice).getFilters().add(new CORSFilter());;
         boolean aptServiceFindByPrice = register(registryAddr, baseURL + "/apt/findAptByPrice", 8086, ServiceInfoModel.SERVICE_APT_SEARCH_PRICE);
         if (!aptServiceFindByPrice) {
             System.out.println("Find apt by price service register failed");
         }
 
-        server.createContext("/apt/findAptByType", AptService::handleRequestFindAptsByType);
+        server.createContext("/apt/findAptByType", AptService::handleRequestFindAptsByType).getFilters().add(new CORSFilter());;
         boolean aptServiceFindByType = register(registryAddr, baseURL + "/apt/findAptByType", 8086, ServiceInfoModel.SERVICE_APT_SEARCH_TYPE);
         if (!aptServiceFindByType) {
             System.out.println("Find apt by type service register failed");
