@@ -26,15 +26,18 @@ public class WishListService extends MicroService {
         HttpContext loadAPI = server.createContext("/load");
         boolean published1 = register(registryAddr, baseURL + "/load", 10001, ServiceInfoModel.SERVICE_WISHLIST_LOAD);
         loadAPI.setHandler(WishListService::handleLoad);
+        loadAPI.getFilters().add(new CORSFilter());
 
         // Set up and publish add service
         HttpContext addAPI = server.createContext("/add");
         addAPI.setHandler(WishListService::handleAdd);
+        addAPI.getFilters().add(new CORSFilter());
         boolean published2 = register(registryAddr, baseURL + "/add", 10001, ServiceInfoModel.SERVICE_WISHLIST_ADD);
 
         // Set up and publish add service
         HttpContext deleteAPI = server.createContext("/delete");
         deleteAPI.setHandler(WishListService::handleDelete);
+        deleteAPI.getFilters().add(new CORSFilter());
         boolean published3 = register(registryAddr, baseURL + "/delete", 10001,
                 ServiceInfoModel.SERVICE_WISHLIST_DELETE);
 
