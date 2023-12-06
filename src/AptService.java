@@ -6,6 +6,8 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.bson.types.Symbol;
 import org.json.JSONObject;
 
 public class AptService extends MicroService{

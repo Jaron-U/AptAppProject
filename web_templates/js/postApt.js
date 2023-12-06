@@ -29,6 +29,7 @@ $(document).ready(function() {
         if (!storedUserData) {
             alert("Please Login First!");
         } else {
+            let userObject = JSON.parse(storedUserData);
             var getServiceString = "http://localhost:8080/disc"
 
             var aptName = $("input[name='aptName']").val();
@@ -79,7 +80,8 @@ $(document).ready(function() {
                         price: price,
                         availableDate: availableDate,
                         Type: type,
-                        Descr: descr
+                        Descr: descr,
+                        posterID: userObject.userID
                     }),
                     success: function (response) {
                         console.log(response)

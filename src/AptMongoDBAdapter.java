@@ -52,7 +52,6 @@ public class AptMongoDBAdapter {
         connect();
         MongoCollection<Document> collection = database.getCollection("apartments");
         List<Apartment> apartments = new ArrayList<>();
-
         try {
             FindIterable<Document> documents = collection.find();
             for (Document doc : documents) {
