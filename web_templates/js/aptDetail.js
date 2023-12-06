@@ -43,7 +43,7 @@ $(document).ready(function() {
 function fetchAptById(selectedAptId) {
     var serviceRegistryURL = "http://localhost:8080/disc"
     // get the apartment service url
-    async function fetchServiceURL() {
+    async function fetchServiceURL(serviceId) {
         try {
             let response = await $.ajax({
                 url: serviceRegistryURL,
@@ -51,7 +51,7 @@ function fetchAptById(selectedAptId) {
                 contentType: 'application/json',
                 data: JSON.stringify({
                     code: ServiceMessageModel.SERVICE_DISCOVER_REQUEST,
-                    data: ServiceInfoModel.SERVICE_APT_LOAD
+                    data: serviceId
                 }),
             });
             if (response.code === 202){
@@ -65,21 +65,25 @@ function fetchAptById(selectedAptId) {
         }
     }
     async function fetchAptByIdData() {
-        let requestURL = await fetchServiceURL();
+        let requestURL = await fetchServiceURL(ServiceInfoModel.SERVICE_APT_LOAD);
         requestURL += ("/" + selectedAptId)
         console.log(requestURL);
         $.ajax({
             url: requestURL,
             type: 'GET',
-            success: function (response) {
+            success: async function (response) {
                 let apartment = JSON.parse(response)
                 console.log(apartment)
+                let poster = await fetchPosterInfo(apartment.posterID)
+                console.log(poster)
                 $('#aptNameContainer').text(apartment.aptName);
                 $('#addressContainer').text(apartment.address);
                 $('#priceContainer').text(apartment.price);
                 $('#typeContainer').text(apartment.Type);
                 $('#areaContainer').text(apartment.area);
                 $('#dateContainer').text(apartment.availableDate);
+                $('#posterNameContainer').text(poster.fullName);
+                $('#posterEmailContainer').text(poster.email);
                 $('#descrContainer').text(apartment.Descr);
 
             },
@@ -89,6 +93,29 @@ function fetchAptById(selectedAptId) {
         });
     }
     fetchAptByIdData()
+
+    async function fetchPosterInfo(posterId) {
+        let getUserInfoUrl = await fetchServiceURL(ServiceInfoModel.SERVICE_USER_LOAD);
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: getUserInfoUrl,
+                type: 'POST',
+                data: JSON.stringify(posterId),
+                success: function (response) {
+                    if (response.userID === -1){
+                        alert("Username or Password is not correct");
+                    } else {
+                        console.log(response)
+                        resolve(response);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching apartment data:', error);
+                    reject(error);
+                }
+            });
+        });
+    }
 }
 
 function addApt2WishList(selectedAptId, userID) {
