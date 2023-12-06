@@ -1,6 +1,6 @@
-# Apartment Rent System
+# Apartment Rental System
 
-ARS streamlines housing transitions in university towns, focusing on ease of subleasing for students and professionals. It’s a straightforward solution for quick and efficient apartment transfers, addressing the unique challenges of relocating and finding short-term housing.
+This application streamlines housing transitions in university towns, focusing on ease of subleasing for students and professionals. It’s a straightforward solution for quick and efficient apartment transfers, addressing the unique challenges of relocating and finding short-term housing.
 
 ## Table of Contents
 
