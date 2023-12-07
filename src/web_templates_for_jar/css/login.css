@@ -1,0 +1,117 @@
+body, select, input, button {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #daa520;
+    color: white;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.navigation .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .navigation .nav-link {
+        padding: 0 5px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navigation {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+#userDisplay {
+    color: black;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+.input-group {
+    margin-bottom: 20px;
+}
+.input-group label {
+    display: block;
+}
+.input-group input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.apt-detail {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0073dc;
+}
+
+.buttons button {
+    width: 95%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.buttons button[type="submit"] {
+    background-color: #5cb85c;
+}
+.buttons button[type="button"] {
+    background-color: #0066cc;
+}
+
+.buttons button[type="submit"]:hover {
+    background-color: #449d44;
+}
+.buttons button[type="button"]:hover {
+    background-color: #0054a7;
+}
+
+.listing-container {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #daa520;
+    color: white;
+    position: sticky;
+    bottom: 0;
+}

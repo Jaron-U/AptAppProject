@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Listings</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="module" src="/js/wishList.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="navbar">
+    <div class="title">Apartments For Rent</div>
+    <div class="navigation">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./wishList.html" class="nav-link" id="wishListLink">MyWishList</a>
+        <a href="./postApt.html" class="nav-link">PostYours</a>
+        <a href="./login.html" class="nav-link" id="loginLink">Login</a>
+        <a href="#" class="nav-link" id="logoutLink" style="display: none;">Logout</a>
+        <div class="nav-link" id="userDisplay" style="display: none;"></div>
+    </div>
+</div>
+
+<div class="search-bar">
+    <h1>Your Wish List</h1>
+</div>
+
+<div class="listing-container">
+    <div id="loadingMessage">No Apartments Data</div>
+</div>
+
+<div class="footer">
+    <footer>
+        <cite>&copy; 2023 Jianglong Yu</cite>
+    </footer>
+</div>
+</body>
+</html>

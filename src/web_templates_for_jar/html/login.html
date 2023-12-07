@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apartment Application</title>
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script type="module" src="/js/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="navbar">
+    <div class="title">Apartments For Rent</div>
+    <div class="navigation">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./wishList.html" class="nav-link" id="wishListLink">MyWishList</a>
+        <a href="./login.html" class="nav-link">Login</a>
+    </div>
+</div>
+
+<div class="listing-container">
+    <div class="login-container">
+        <h2>Apartment Application</h2>
+        <form id="loginForm" action="/login" method="post">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="buttons">
+                <button type="submit">Login</button>
+                <button id="goToRegister" type="button">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    <footer>
+        <cite>&copy; 2023 Jianglong Yu</cite>
+    </footer>
+</div>
+</body>
+</html>

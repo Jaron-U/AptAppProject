@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apartment Application</title>
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script type="module" src="/js/aptDetail.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="navbar">
+    <div class="title">Apartments For Rent</div>
+    <div class="navigation">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./wishList.html" class="nav-link" id="wishListLink">MyWishList</a>
+        <a href="./postApt.html" class="nav-link">PostYours</a>
+        <a href="./login.html" class="nav-link" id="loginLink">Login</a>
+        <a href="#" class="nav-link" id="logoutLink" style="display: none;">Logout</a>
+        <div class="nav-link" id="userDisplay" style="display: none;"></div>
+    </div>
+</div>
+
+<div class="listing-container">
+    <div class="login-container">
+        <h2>Apartment Detail</h2>
+        <form id="addWishListForm" action="/addWishList" method="post">
+            <div class="input-group">
+                <label>Apartment Name:</label>
+                <div id="aptNameContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Address:</label>
+                <div id="addressContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Apartment Price ($ Monthly):</label>
+                <div id="priceContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Type:</label>
+                <div id="typeContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Apartment Area (sq.ft):</label>
+                <div id="areaContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Available Date:</label>
+                <div id="dateContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Poster Name:</label>
+                <div id="posterNameContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Poster Email:</label>
+                <div id="posterEmailContainer" class="apt-detail"></div>
+            </div>
+            <div class="input-group">
+                <label>Description:</label>
+                <div id="descrContainer" class="apt-detail"></div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Add To Wish List</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    <footer>
+        <cite>&copy; 2023 Jianglong Yu</cite>
+    </footer>
+</div>
+</body>
+</html>
