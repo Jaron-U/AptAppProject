@@ -52,7 +52,7 @@ public class DT_AptDetailScreen extends JFrame {
     public DT_AptDetailScreen() {
         Color lightBlue = new Color(230, 246, 250);
 
-        this.setTitle("Create New Listing for Apartment");
+        this.setTitle("Apartment Detail");
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
         this.setBounds(700, 200, 550, 650);
 
