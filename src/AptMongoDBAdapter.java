@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AptMongoDBAdapter {
     private MongoClient mongoClient = null;
-    private static String conStr = "mongodb+srv://jianglongyu:Password123@cluster0.0qmt6kt.mongodb.net";
+    private static String conStr = "mongodb+srv://jianglongyu:******@cluster0.0qmt6kt.mongodb.net";
 
     private MongoDatabase database;
     public void connect() {
